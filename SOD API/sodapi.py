@@ -6,10 +6,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.routing import request_response
 from retrieveData import DataRetrieve
+from nameko.events import EventDispatcher, event_handler
+from nameko.rpc import rpc, RpcProxy
+import uvicorn
+
 
 app = FastAPI()
 
 origins = ["*"]
+start = RpcProxy("StartofDay")
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,7 +34,6 @@ class RequestBody(BaseModel):
     targetDate:str
     noofdays:str
     nrange:Optional[str] = None
-    
     
 @app.post("/cpr")
 async def cpr(request : RequestBody):
@@ -50,3 +55,11 @@ async def nr4(request : RequestBody):
 async def candles(request : RequestBody):
         candledata = DataRetrieve(request.targetDate)
         return candledata.candles()
+
+
+@app.post("/runService")
+async def runService(request: RequestBody):
+        return start.setstartofday(request.targetDate,request.noofdays)
+        
+if __name__ == "__main__":
+        uvicorn.run(app, host="localhost",port=8085)

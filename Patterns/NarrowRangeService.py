@@ -1,7 +1,7 @@
 import json
 from nameko.events import EventDispatcher, event_handler
 from nameko.rpc import rpc
-from NarrowRangeAnalysis import NarrowRange
+from Patterns.NarrowRangeAnalysis import NarrowRange
 
 
 class NarrowRangeService(object):
