@@ -25,7 +25,7 @@ class CPRImplementation:
         self.pivotpoints['prevclose'] = df['prevclose']
         self.pivotpoints['prevVolume'] = df['prevVolume']
         self.pivotpoints['symbol'] = df['symbol']
-        self.pivotpoints['timestamp'] = df['timestamp']
+        self.pivotpoints['timestamp'] =pd.to_datetime(df['tradedate'],format='%Y%m%d',errors='ignore')
         self.pivotpoints['pivot'] = round((df['prevhigh']+df['prevlow']+df['prevclose'])/3.0,2)
         self.pivotpoints['BC'] = round((df['prevhigh']+df['prevlow'])/2,2)
         self.pivotpoints['TC'] = round((self.pivotpoints['pivot'] - self.pivotpoints['BC']) + self.pivotpoints['pivot'],2)

@@ -1,4 +1,10 @@
 import socketio
+from nameko.standalone.rpc import ClusterRpcProxy
+import json
+
+config = {
+    'AMQP_URI': 'pyamqp://guest:guest@localhost'
+}
 
 sio = socketio.AsyncServer( async_mode='asgi', cors_allowed_origins='*')
 app = socketio.ASGIApp(sio)
@@ -15,5 +21,12 @@ async def disconnect(sid):
 @sio.event
 async def startofday(sid,data):
     print("Data received from Server " + data)
+    requestdata = json.loads(data)
+    print(requestdata["startdate"])    
     await sio.emit('status', 'Received Data from server ' + data)
+    
+    
+def processdata(data):
+    with ClusterRpcProxy(config) as cluster_rpc:
+        pass
     

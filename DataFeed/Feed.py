@@ -15,8 +15,8 @@ class EndofDayFeed(object):
         cursor = self.conn.cursor()
         query = 'SELECT symbol, tradedate,openPrice,highPrice,lowPrice,closePrice,volume FROM t_eod_equities_data WHERE tradeDate between %(start)s and %(end)s'
         df = pd.read_sql(query,params={"start":startDate,"end":endDate},con=self.conn)
-        df['timestamp'] = pd.to_datetime(df['tradedate'],format='%Y%m%d',errors='ignore')
-        df = df.set_index(df['timestamp'])
+        #df['timestamp'] = pd.to_datetime(df['tradedate'],format='%Y%m%d',errors='ignore')
+        #df = df.set_index(df['timestamp'])
         return df
     
     

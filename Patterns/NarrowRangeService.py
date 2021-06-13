@@ -13,7 +13,7 @@ class NarrowRangeService(object):
     def setnarrowrange(self,request):
         requestdata = json.loads(request)
         targetDate = requestdata["targetDate"]
-        noofdays = 10
+        noofdays = requestdata["noofdays"]
         rangepattern = NarrowRange(targetDate,noofdays)
         rangepattern.setNarrowRange()
         return "Success"
