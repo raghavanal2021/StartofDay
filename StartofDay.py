@@ -3,7 +3,7 @@ from nameko.events import EventDispatcher, event_handler
 from nameko.rpc import rpc
 import json
 
-class StartofDay(object):
+class DayStart():
     name = "StartofDay_Service"
     
     ''' Set Event Dispatcher '''

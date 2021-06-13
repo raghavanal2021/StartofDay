@@ -2,7 +2,7 @@ import json
 from nameko.events import EventDispatcher, event_handler
 from nameko.rpc import rpc
 from nameko_http.exceptions import HttpError
-from PatternImpl import ImplementPattern
+from Patterns.PatternImpl import ImplementPattern
 import eventlet.tpool
 import numpy as np
 

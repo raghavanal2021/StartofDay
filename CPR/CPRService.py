@@ -1,10 +1,10 @@
 import json
 from nameko.events import EventDispatcher, event_handler
 from nameko.rpc import rpc
-from CPRImpl import CPRImplementation
+from CPR.CPRImpl import CPRImplementation
 import numpy as np
 
-class CPRCalc(object):
+class CPRCalc:
     name = "CPR_Service"
     
     ''' Set the event dispatcher '''

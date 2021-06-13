@@ -12,7 +12,6 @@ class NarrowRange():
           self.target = target
           self.masterlist = EndofDayFeedSymbol().getMaster()
           self.eodlist = EndofDayFeed().getData(target, noofdays)
-          self.symboldf = pd.DataFrame()
           self.outputdf = pd.DataFrame()
           
         def setNarrowRange(self):
@@ -21,12 +20,15 @@ class NarrowRange():
             symbollist = data['master_symbol'].tolist()
             for symbol in symbollist:
                 try:
-                    self.symboldf = symboldata[(symboldata['symbol'] == symbol)]
+                    
+                    self.symboldf = pd.DataFrame(symboldata[(symboldata['symbol'] == symbol)])
                     self.symboldf = self.symboldf.reset_index()
                     self.symboldf['range'] = self.symboldf['highPrice'] - self.symboldf['lowPrice']
                     self.symboldf['NR7'] = self.symboldf['range'].rolling(window=7).min().shift(1).fillna(0)
                     self.symboldf['NR4'] = self.symboldf['range'].rolling(window=4).min().shift(1).fillna(0)
-                except:
+                    self.symboldf['timestamp'] = pd.to_datetime( self.symboldf['tradedate'],format='%Y%m%d',errors='ignore')
+                    self.symboldf =  self.symboldf.set_index( self.symboldf['timestamp'])
+                except Exception as e:
                     pass
                 self.outputdf = self.outputdf.append(self.symboldf.tail(1))
             df1 = self.outputdf[(self.outputdf['range'] <= self.outputdf['NR7']) & (self.outputdf['range']>0)]      
