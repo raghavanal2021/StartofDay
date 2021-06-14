@@ -34,7 +34,7 @@ class Utilities:
             scontract.setTargetDate(dates)
             scontract.setnoofdays(inputcontract.getnoofdays())
             servicecontracts.append(scontract.__dict__)
-        print(servicecontracts)
+       # print(servicecontracts)
         return servicecontracts
             
 '''

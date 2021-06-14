@@ -1,3 +1,4 @@
+import json
 class AuditResponse(object):
     
     def __init__(self,event,timestamp,status,description,errorcode,errorDesc):
@@ -10,5 +11,6 @@ class AuditResponse(object):
         
     
     def audit(self):
-        return ({'event':self.event,'timestamp':self.timestamp,'status':self.status, 'description':self.description, 'errorcode':self.errorcode, 'self.errorDesc':self.errorDesc})
+        
+        return (json.dumps({'event':self.event,'timestamp':self.timestamp,'status':self.status, 'description':self.description, 'errorcode':self.errorcode, 'errorDesc':self.errorDesc}))
         

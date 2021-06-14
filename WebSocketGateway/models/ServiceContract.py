@@ -2,7 +2,7 @@ class ServiceContract:
     
     def __init__(self):
         self.targetDate = None
-        self.noofDays = None
+        self.noofdays = None
         
     
     def getTargetDate(self):
@@ -13,9 +13,9 @@ class ServiceContract:
     
         
     def getnoofdays(self):
-        return self.noofDays
+        return self.noofdays
     
     def setnoofdays(self,noofdays):
-        self.noofDays = noofdays
+        self.noofdays = noofdays
         
         

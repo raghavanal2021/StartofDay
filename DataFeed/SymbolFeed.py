@@ -21,7 +21,7 @@ class EndofDayFeedSymbol(object):
     
     
     def getMaster(self):
-        query = "SELECT master_symbol,master_name,master_isin FROM t_equities_master"
+        query = "SELECT distinct master_symbol,master_name,master_isin FROM t_equities_master a INNER JOIN t_indices_stocks_map b on a.master_symbol = b.symbol"
         masterdf = pd.read_sql(query,self.conn)
         return masterdf
         

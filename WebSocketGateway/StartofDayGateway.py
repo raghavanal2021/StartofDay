@@ -40,7 +40,7 @@ class StartofDay:
                 print(response)
             except Exception as e:
                 response = AuditResponse(event='Pattern Analysis Status',timestamp = datetime.datetime.now().isoformat() ,status = pattern.result(),description=f"Pattern Analysis for payload {payload} errored ",errorcode = e ,errorDesc = e).audit()
-        return pattern.result()
+        return response
     
 
 
